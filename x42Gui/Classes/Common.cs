@@ -6,12 +6,15 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using x42Gui.Models;
 
 namespace x42Gui.Classes
 {
     public class Common
     {
+
+
         internal static UserSettings CurrentSettings = null;
 
         internal static string LastError;
@@ -29,6 +32,54 @@ namespace x42Gui.Classes
         /// Список адресов по всем кошелькам и аккаунтам
         /// </summary>
         internal static List<AddressesModel> Addresses = null;
+
+        internal static string NetworkFolder
+        {
+            get
+            {
+                string name = "x42";
+
+                if (CurrentSettings.IsStratis)
+                {
+                    name = "Stratis";
+                }
+
+                if (CurrentSettings.Mainnet)
+                {
+                    name += "Main";
+                }
+                else
+                {
+                    name += "Test";
+                }
+
+                string path = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), name);
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                return path;
+            }
+        }
+
+        internal static string AddressesFile
+        {
+            get
+            {
+                return Path.Combine(Common.NetworkFolder, Constants.AddressesFileName);
+            }
+        }
+
+        internal static string WalletHistoryFile
+        {
+            get
+            {
+                return Path.Combine(Common.NetworkFolder, Constants.HistoryFileName);
+            }
+        }
+
 
         internal static async Task<bool> LoadLocalWallets()
         {

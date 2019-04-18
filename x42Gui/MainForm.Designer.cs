@@ -35,6 +35,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshNetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -47,6 +48,7 @@
             this.buttonOverview = new System.Windows.Forms.Button();
             this.buttonRecieve = new System.Windows.Forms.Button();
             this.buttonSend = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageOverview = new System.Windows.Forms.TabPage();
@@ -110,7 +112,8 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
+            this.optionsToolStripMenuItem,
+            this.refreshNetToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -118,9 +121,17 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            // 
+            // refreshNetToolStripMenuItem
+            // 
+            this.refreshNetToolStripMenuItem.Name = "refreshNetToolStripMenuItem";
+            this.refreshNetToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.refreshNetToolStripMenuItem.Text = "Refresh Net";
+            this.refreshNetToolStripMenuItem.ToolTipText = "обновить список кошельков и аккаунтов";
+            this.refreshNetToolStripMenuItem.Click += new System.EventHandler(this.RefreshNetToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -146,7 +157,7 @@
             this.buttonSpendableTransactions.Name = "buttonSpendableTransactions";
             this.buttonSpendableTransactions.Size = new System.Drawing.Size(150, 36);
             this.buttonSpendableTransactions.TabIndex = 3;
-            this.buttonSpendableTransactions.Text = "Непотраченные";
+            this.buttonSpendableTransactions.Text = "Spendable";
             this.toolTip1.SetToolTip(this.buttonSpendableTransactions, "непотраченные входы");
             this.buttonSpendableTransactions.UseVisualStyleBackColor = true;
             this.buttonSpendableTransactions.Click += new System.EventHandler(this.buttonSpendablTransactions_Click);
@@ -161,7 +172,7 @@
             this.buttonHistory.Name = "buttonHistory";
             this.buttonHistory.Size = new System.Drawing.Size(150, 36);
             this.buttonHistory.TabIndex = 6;
-            this.buttonHistory.Text = "История";
+            this.buttonHistory.Text = "History";
             this.toolTip1.SetToolTip(this.buttonHistory, "история транзакций");
             this.buttonHistory.UseVisualStyleBackColor = true;
             this.buttonHistory.Click += new System.EventHandler(this.buttonHistory_Click);
@@ -211,6 +222,7 @@
             this.flowLayoutPanel1.Controls.Add(this.buttonSend);
             this.flowLayoutPanel1.Controls.Add(this.buttonSpendableTransactions);
             this.flowLayoutPanel1.Controls.Add(this.buttonHistory);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 85);
@@ -229,7 +241,7 @@
             this.buttonOverview.Name = "buttonOverview";
             this.buttonOverview.Size = new System.Drawing.Size(150, 35);
             this.buttonOverview.TabIndex = 0;
-            this.buttonOverview.Text = "Обзор";
+            this.buttonOverview.Text = "Overview";
             this.buttonOverview.UseVisualStyleBackColor = true;
             this.buttonOverview.Click += new System.EventHandler(this.buttonOverview_Click);
             // 
@@ -243,7 +255,7 @@
             this.buttonRecieve.Name = "buttonRecieve";
             this.buttonRecieve.Size = new System.Drawing.Size(150, 36);
             this.buttonRecieve.TabIndex = 1;
-            this.buttonRecieve.Text = "Получение";
+            this.buttonRecieve.Text = "Recieve";
             this.buttonRecieve.UseVisualStyleBackColor = true;
             this.buttonRecieve.Click += new System.EventHandler(this.buttonRecieve_Click);
             // 
@@ -257,9 +269,19 @@
             this.buttonSend.Name = "buttonSend";
             this.buttonSend.Size = new System.Drawing.Size(150, 36);
             this.buttonSend.TabIndex = 2;
-            this.buttonSend.Text = "Отправка";
+            this.buttonSend.Text = "Send";
             this.buttonSend.UseVisualStyleBackColor = true;
             this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 242);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // pictureBox1
             // 
@@ -458,5 +480,7 @@
         private System.Windows.Forms.ImageList imageListLarge;
         private System.Windows.Forms.ImageList imageListSmall;
         private UserControls.ReceiveView receiveView1;
+        private System.Windows.Forms.ToolStripMenuItem refreshNetToolStripMenuItem;
+        private System.Windows.Forms.Button button1;
     }
 }

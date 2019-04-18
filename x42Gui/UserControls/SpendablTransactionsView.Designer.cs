@@ -99,7 +99,7 @@
             this.olvColumnAmount.CellPadding = null;
             this.olvColumnAmount.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.olvColumnAmount.IsEditable = false;
-            this.olvColumnAmount.Text = "Сумма";
+            this.olvColumnAmount.Text = "Amount";
             this.olvColumnAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.olvColumnAmount.Width = 102;
             // 
@@ -110,7 +110,7 @@
             this.olvColumnTime.CellPadding = null;
             this.olvColumnTime.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvColumnTime.IsEditable = false;
-            this.olvColumnTime.Text = "Дата";
+            this.olvColumnTime.Text = "Time";
             this.olvColumnTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvColumnTime.Width = 110;
             // 
@@ -118,9 +118,10 @@
             // 
             this.olvColumnConfirmations.AspectName = "Confirmations";
             this.olvColumnConfirmations.CellPadding = null;
+            this.olvColumnConfirmations.FillsFreeSpace = true;
             this.olvColumnConfirmations.IsEditable = false;
             this.olvColumnConfirmations.IsTileViewColumn = true;
-            this.olvColumnConfirmations.Text = "Подтверждений";
+            this.olvColumnConfirmations.Text = "Confirmations";
             this.olvColumnConfirmations.Width = 85;
             // 
             // imageList1
@@ -165,9 +166,9 @@
             this.labelSeveralAccountChecked.ForeColor = System.Drawing.Color.Red;
             this.labelSeveralAccountChecked.Location = new System.Drawing.Point(303, 9);
             this.labelSeveralAccountChecked.Name = "labelSeveralAccountChecked";
-            this.labelSeveralAccountChecked.Size = new System.Drawing.Size(229, 13);
+            this.labelSeveralAccountChecked.Size = new System.Drawing.Size(223, 13);
             this.labelSeveralAccountChecked.TabIndex = 40;
-            this.labelSeveralAccountChecked.Text = "Выбраны транзакции из разных аккаунтов!";
+            this.labelSeveralAccountChecked.Text = "Selected transactions from different accounts!";
             this.labelSeveralAccountChecked.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelSelectedTransactions

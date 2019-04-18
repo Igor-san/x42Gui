@@ -41,7 +41,7 @@
             this.panel1.Controls.Add(this.buttonCancel);
             this.panel1.Controls.Add(this.buttonOk);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(5, 118);
+            this.panel1.Location = new System.Drawing.Point(5, 106);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(312, 31);
             this.panel1.TabIndex = 0;
@@ -73,7 +73,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(5, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(312, 50);
+            this.label1.Size = new System.Drawing.Size(312, 38);
             this.label1.TabIndex = 1;
             this.label1.Text = "Message";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -81,7 +81,7 @@
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBox1.Location = new System.Drawing.Point(5, 55);
+            this.textBox1.Location = new System.Drawing.Point(5, 43);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(312, 63);
@@ -93,7 +93,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(322, 154);
+            this.ClientSize = new System.Drawing.Size(322, 142);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.panel1);
@@ -103,7 +103,7 @@
             this.Name = "MessageForm";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "MessageForm";
+            this.Text = "Message";
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

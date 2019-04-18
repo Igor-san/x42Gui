@@ -12,13 +12,28 @@ namespace x42Gui.Forms
         string Status;
         Money Fee;
 
-        public TransactionDetailsForm(HistoryRecord trans)
+        public TransactionDetailsForm(HistoryRecord trans, long blockCount)
         {
             InitializeComponent();
 
+            string confirmation=String.Empty;
+
             StringBuilder sb = new StringBuilder();
             //TODO это не число подтверждений а в каком блоке включена транзакция
-            Status = trans.ConfirmedInBlock == null ? "not in block" : $"in {trans.ConfirmedInBlock} block";
+            // Status = trans.ConfirmedInBlock == null ? "not in block" : $"in {trans.ConfirmedInBlock} block";
+            if (trans.ConfirmedInBlock == null)
+            {
+                Status = "not in block";
+            }
+            else
+            {
+                if (blockCount > 0)
+                {
+                    confirmation =$", {blockCount - (long)trans.ConfirmedInBlock} confirmations";
+                }
+
+                Status = $"in {trans.ConfirmedInBlock} block {confirmation}";
+            }
 
             sb.AppendLine($"Status: {Status}");
             sb.AppendLine($"Date: {trans.Timestamp.DateTime}");

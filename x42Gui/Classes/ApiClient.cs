@@ -91,6 +91,21 @@ namespace x42Gui.Classes
             }
         }
 
+        internal async Task<long> GetBlockCount()
+        {
+            try
+            {
+                Error = String.Empty;
+                Url url = new Url(ApiUrl).AppendPathSegments("blockstore/getblockcount");
+                return await url.GetJsonAsync<long>();
+            }
+            catch (Exception ex)
+            {
+                Error = ex.Message;
+                return -1;
+            }
+        }
+
         internal async Task<WalletHistoryModel> GetHistory(string walletName, string accountName = null)
         {
             try

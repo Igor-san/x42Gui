@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿/*
+16.04.2019 Amount not specified - при отсутствии сдачи не формировать реципиента
+ * */
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 

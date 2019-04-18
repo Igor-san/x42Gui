@@ -9,14 +9,14 @@ using x42Gui.Models;
 using x42Gui.Utilities;
 using System.IO;
 using x42Gui.Forms;
+using System.ComponentModel;
 
 namespace x42Gui.UserControls
 {
     public partial class HistoryView : UserControl
     {
         private readonly FileStorage<List<WalletHistoryModel>> fileStorage;
-
-        string WalletHistoryFile;
+        long BlockCount=-1;
 
         protected override CreateParams CreateParams
         {
@@ -34,8 +34,12 @@ namespace x42Gui.UserControls
 
             InitializeListView();
 
-            this.WalletHistoryFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), Constants.HistoryFileName);
-            this.fileStorage = new FileStorage<List<WalletHistoryModel>>(this.WalletHistoryFile);
+            if ((LicenseManager.UsageMode == LicenseUsageMode.Designtime))
+                return;
+
+            this.fileStorage = new FileStorage<List<WalletHistoryModel>>(Common.WalletHistoryFile);
+
+            timerRefresh.Start();
         }
 
         private void StatusMessage(string msg)
@@ -46,6 +50,11 @@ namespace x42Gui.UserControls
         private void ErrorMessage(string msg)
         {
             MainForm.CurrentMainForm.ErrorMessage("[HistoryView] " + msg);
+        }
+
+        internal void ClearAll()
+        {
+            objectListView1.SetObjects(null);
         }
 
         private async void buttonRefresh_Click(object sender, EventArgs e)
@@ -61,7 +70,6 @@ namespace x42Gui.UserControls
                     return false;
 
                 ApiClient client = new ApiClient();
-
 
                 Common.History = new List<WalletHistoryModel>();
 
@@ -80,10 +88,13 @@ namespace x42Gui.UserControls
                     }
                 }
 
-                this.fileStorage.SaveToFile(Common.History, this.WalletHistoryFile);
+                this.fileStorage.SaveToFile(Common.History, Common.WalletHistoryFile);
 
                 labelNotActual.Visible = false;
                 WalletHistoryModelToHistoryTable();
+
+                //Ну и узнаем какой последний блок для отображения числа подтверждений
+                BlockCount = await client.GetBlockCount();
 
                 return true;
 
@@ -125,14 +136,15 @@ namespace x42Gui.UserControls
             }
 
             objectListView1.SetObjects(table);
+            objectListView1.Sort(olvColumnTimestamp, SortOrder.Descending);
         }
 
         internal void LoadHistoryFromFile()
         {
             labelNotActual.Visible = true;
-            if (File.Exists(this.WalletHistoryFile))
+            if (File.Exists(Common.WalletHistoryFile))
             {
-                Common.History = this.fileStorage.LoadByFileName(this.WalletHistoryFile);
+                Common.History = this.fileStorage.LoadByFileName(Common.WalletHistoryFile);
                 WalletHistoryModelToHistoryTable();
             }
 
@@ -161,10 +173,18 @@ namespace x42Gui.UserControls
             var item = objectListView1.GetItem(objectListView1.SelectedIndex).RowObject;
             if (item is HistoryRecord)
             {
-                TransactionDetailsForm frm = new TransactionDetailsForm((HistoryRecord)item);
+                TransactionDetailsForm frm = new TransactionDetailsForm((HistoryRecord)item, BlockCount);
                 frm.ShowDialog();
 
             }
+        }
+
+        private void TimerRefresh_Tick(object sender, EventArgs e)
+        {
+            buttonRefresh.Enabled = false;
+            GetHistory();
+            buttonRefresh.Enabled = true;
+            labelBlockCount.Text = $"{BlockCount:N0} blocks";
         }
     }
 }

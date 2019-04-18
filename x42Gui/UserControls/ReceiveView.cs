@@ -7,14 +7,13 @@ using x42Gui.Models;
 using x42Gui.Utilities;
 using System.IO;
 using BrightIdeasSoftware;
+using System.ComponentModel;
 
 namespace x42Gui.UserControls
 {
     public partial class ReceiveView : UserControl
     {
         private readonly FileStorage<List<AddressesModel>> fileStorage;
-
-        string AddressesFile;
 
         protected override CreateParams CreateParams
         {
@@ -42,14 +41,21 @@ namespace x42Gui.UserControls
 
             InitializeListView();
 
-            this.AddressesFile = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), Constants.AddressesFileName);
-            this.fileStorage = new FileStorage<List<AddressesModel>>(this.AddressesFile);
+            if ((LicenseManager.UsageMode == LicenseUsageMode.Designtime))
+                return;
+
+            this.fileStorage = new FileStorage<List<AddressesModel>>(Common.AddressesFile);
         }
 
 
         private void InitializeListView()
         {
             ;
+        }
+
+        internal void ClearAll()
+        {
+            objectListView1.SetObjects(null);
         }
 
         private void AddressesModelToAddressTable()
@@ -103,7 +109,7 @@ namespace x42Gui.UserControls
 
                 }
 
-                this.fileStorage.SaveToFile(Common.Addresses, this.AddressesFile);
+                this.fileStorage.SaveToFile(Common.Addresses, Common.AddressesFile);
 
                 labelNotActual.Visible = false;
                 AddressesModelToAddressTable();
@@ -122,9 +128,9 @@ namespace x42Gui.UserControls
         internal void LoadAddressesFromFile()
         {
             labelNotActual.Visible = true;
-            if (File.Exists(this.AddressesFile))
+            if (File.Exists(Common.AddressesFile))
             {
-                Common.Addresses = this.fileStorage.LoadByFileName(this.AddressesFile);
+                Common.Addresses = this.fileStorage.LoadByFileName(Common.AddressesFile);
                 AddressesModelToAddressTable();
             }
 
@@ -158,6 +164,7 @@ namespace x42Gui.UserControls
 
             }
         }
+
 
     }
 }

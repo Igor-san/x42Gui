@@ -270,7 +270,7 @@
             this.MinimizeBox = false;
             this.Name = "OptionsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Опции";
+            this.Text = "Options";
             this.Load += new System.EventHandler(this.OptionsForm_Load);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);

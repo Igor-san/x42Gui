@@ -129,13 +129,14 @@
             // 
             // labelNotActual
             // 
+            this.labelNotActual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelNotActual.AutoSize = true;
             this.labelNotActual.ForeColor = System.Drawing.Color.Red;
-            this.labelNotActual.Location = new System.Drawing.Point(3, 9);
+            this.labelNotActual.Location = new System.Drawing.Point(348, 9);
             this.labelNotActual.Name = "labelNotActual";
-            this.labelNotActual.Size = new System.Drawing.Size(120, 13);
+            this.labelNotActual.Size = new System.Drawing.Size(100, 13);
             this.labelNotActual.TabIndex = 2;
-            this.labelNotActual.Text = "данные не актуальны!";
+            this.labelNotActual.Text = "data is not relevant!";
             // 
             // buttonRefresh
             // 

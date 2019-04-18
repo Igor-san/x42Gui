@@ -41,12 +41,15 @@
             this.olvColumnTimestamp = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnAddress = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnTxId = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.timerRefresh = new System.Windows.Forms.Timer(this.components);
+            this.labelBlockCount = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objectListView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.labelBlockCount);
             this.panelTop.Controls.Add(this.labelNotActual);
             this.panelTop.Controls.Add(this.buttonRefresh);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
@@ -57,13 +60,14 @@
             // 
             // labelNotActual
             // 
+            this.labelNotActual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelNotActual.AutoSize = true;
             this.labelNotActual.ForeColor = System.Drawing.Color.Red;
-            this.labelNotActual.Location = new System.Drawing.Point(12, 8);
+            this.labelNotActual.Location = new System.Drawing.Point(378, 9);
             this.labelNotActual.Name = "labelNotActual";
-            this.labelNotActual.Size = new System.Drawing.Size(120, 13);
+            this.labelNotActual.Size = new System.Drawing.Size(100, 13);
             this.labelNotActual.TabIndex = 1;
-            this.labelNotActual.Text = "данные не актуальны!";
+            this.labelNotActual.Text = "data is not relevant!";
             // 
             // buttonRefresh
             // 
@@ -105,7 +109,6 @@
             this.objectListView1.RowHeight = 30;
             this.objectListView1.Size = new System.Drawing.Size(551, 417);
             this.objectListView1.SortGroupItemsByPrimaryColumn = false;
-            this.objectListView1.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.objectListView1.SpaceBetweenGroups = 3;
             this.objectListView1.TabIndex = 38;
             this.objectListView1.UseAlternatingBackColors = true;
@@ -169,6 +172,20 @@
             this.olvColumnTxId.IsVisible = false;
             this.olvColumnTxId.Text = "TxId";
             // 
+            // timerRefresh
+            // 
+            this.timerRefresh.Interval = 10000;
+            this.timerRefresh.Tick += new System.EventHandler(this.TimerRefresh_Tick);
+            // 
+            // labelBlockCount
+            // 
+            this.labelBlockCount.AutoSize = true;
+            this.labelBlockCount.Location = new System.Drawing.Point(20, 9);
+            this.labelBlockCount.Name = "labelBlockCount";
+            this.labelBlockCount.Size = new System.Drawing.Size(65, 13);
+            this.labelBlockCount.TabIndex = 2;
+            this.labelBlockCount.Text = "Block Count";
+            // 
             // HistoryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,5 +214,7 @@
         private BrightIdeasSoftware.OLVColumn olvColumnAddress;
         private BrightIdeasSoftware.OLVColumn olvColumnTimestamp;
         private BrightIdeasSoftware.OLVColumn olvColumnTxId;
+        private System.Windows.Forms.Timer timerRefresh;
+        private System.Windows.Forms.Label labelBlockCount;
     }
 }

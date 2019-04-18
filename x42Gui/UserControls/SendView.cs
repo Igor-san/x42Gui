@@ -53,7 +53,7 @@ namespace x42Gui.UserControls
             MainForm.CurrentMainForm.ErrorMessage("[SendView] " + msg);
         }
 
-        private void ClearAll()
+        internal void ClearAll()
         {
             labelQuantity.Text = "";
             labelChange.Text = "";
@@ -213,16 +213,18 @@ namespace x42Gui.UserControls
                 //свой адрес для сдачи можно установить если сами выбираем входа, иначе не узнать какие выберет программа
                 if (checkBoxCustomChangeAddress.Checked && !String.IsNullOrEmpty(textBoxCustomChangeAddress.Text.Trim()))
                 {
-                    //нужно посчитать сколько будет сдачи и направить все это на адрес
+                    //нужно посчитать сколько будет сдачи и, если больше 0, направить все это на адрес
                     string changeAddress = textBoxCustomChangeAddress.Text.Trim();
-
                     Money change = Money.FromUnit(SelectedTransactions.Sum(x => x.Amount), MoneyUnit.Satoshi) - how - Common.CurrentSettings.MinTxFee;
-                    recipients.Add(new RecipientModel(changeAddress, change.ToString()));
+                    if (change > Money.Zero)
+                    {
+                        recipients.Add(new RecipientModel(changeAddress, change.ToString()));
+                    }
                 }
 
             }
 
-            #region Fee - на Stratis MainNet не тестировал!!!
+            #region Fee - на Stratis MainNet почти тестировал!!!
             if (Common.CurrentSettings.IsStratis)
             {
                 //Оценка комиссии - Для Статиса только? Но все равно комиссия посчитается автоматически так как передаю ее тип а не значение

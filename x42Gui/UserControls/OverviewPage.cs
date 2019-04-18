@@ -37,6 +37,17 @@ namespace x42Gui.UserControls
             MainForm.CurrentMainForm.ErrorMessage("[SendView] " + msg);
         }
 
+        internal void ClearAll()
+        {
+            this.objectListView1.SetObjects(null); 
+
+            keyValueViewSpendable.SetKeyValue("Spendable", "?");
+            keyValueViewStake.SetKeyValue("Stake", "?");
+            keyValueViewUnconfirmed.SetKeyValue("Unconfirmed", "?");
+            keyValueViewConfirmed.SetKeyValue("Confirmed", "?");
+            keyValueViewTotal.SetKeyValue("Total", "?");
+        }
+
         public void SetInfo(List<WalletBalanceModel> balances)
         {
             try
@@ -127,6 +138,8 @@ namespace x42Gui.UserControls
                 e.SubItem.Decoration = decoration;
             }
         }
+
+
     }
 
     public class Trans

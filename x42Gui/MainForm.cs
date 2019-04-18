@@ -38,15 +38,23 @@ namespace x42Gui
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            statusMessagePanel.SetCollapsed(true);
+            try
+            {
 
-            tabControlMain.Appearance = TabAppearance.FlatButtons;
-            tabControlMain.ItemSize = new Size(0, 1);
-            tabControlMain.SizeMode = TabSizeMode.Fixed;
+                statusMessagePanel.SetCollapsed(true);
 
-            SettingsChanged();
+                tabControlMain.Appearance = TabAppearance.FlatButtons;
+                tabControlMain.ItemSize = new Size(0, 1);
+                tabControlMain.SizeMode = TabSizeMode.Fixed;
 
-            tabControlMain.SelectedTab = tabPageOverview;
+                SettingsChanged();
+
+                tabControlMain.SelectedTab = tabPageOverview;
+            }
+            catch(Exception ex)
+            {
+                ErrorMessage("FormMain_Load: "+ex.Message);
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -157,6 +165,8 @@ namespace x42Gui
         }
         private async void SettingsChanged()
         {
+            ClearAllTab();
+
             if (Common.CurrentSettings.Mainnet)
             {
                 this.Text = Constants.AppName + "  Mainnet";
@@ -173,10 +183,10 @@ namespace x42Gui
             {
                 this.Text += " X42";
             }
-
+            //при смене сети нужно получить новый список кошельков и аккаунтов
             if (!await Common.LoadLocalWallets())
             {
-                ErrorMessage("Не удалось получить список кошельков:" + Common.LastError + ". Возможно АПИ недоступен.");
+                ErrorMessage("Не удалось получить список кошельков:" + Common.LastError + ". Возможно АПИ недоступен. Попробуйте выполнить Refresh Net, или перезагрузить программу.");
                 historyView1.LoadHistoryFromFile(); //загрузим историю из файла
                 receiveView1.LoadAddressesFromFile(); //адреса из файла
                 overviewPage1.ShowLastTransactions(); //а уж потом отобразим последние
@@ -186,6 +196,23 @@ namespace x42Gui
                 GetOverviewInfo(); //3) загрузим общую информацию
                 spendableTransactionsView1.GetSpendableTransactions(); //2)
             }
+        }
+        /// <summary>
+        /// Очистить табы от старых записей при смене сети
+        /// </summary>
+        private void ClearAllTab()
+        {
+            overviewPage1.ClearAll();
+            receiveView1.ClearAll();
+            sendView1.ClearAll();
+            spendableTransactionsView1.ClearAll();
+            historyView1.ClearAll();
+
+        }
+
+        private void RefreshNetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsChanged();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -201,6 +228,10 @@ namespace x42Gui
 
         }
 
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            ClearAllTab();
+        }
     }
 
 }

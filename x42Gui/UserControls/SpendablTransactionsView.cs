@@ -60,6 +60,11 @@ namespace x42Gui.UserControls
 
         }
 
+        internal void ClearAll()
+        {
+            treeListView1.SetObjects(null);
+        }
+
         private void PrepareTreeListView()
         {
             try
@@ -212,6 +217,8 @@ namespace x42Gui.UserControls
             }
 
         }
+
+
 
         private void treeListView1_FormatCell(object sender, BrightIdeasSoftware.FormatCellEventArgs e)
         {
