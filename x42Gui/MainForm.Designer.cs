@@ -48,7 +48,6 @@
             this.buttonOverview = new System.Windows.Forms.Button();
             this.buttonRecieve = new System.Windows.Forms.Button();
             this.buttonSend = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageOverview = new System.Windows.Forms.TabPage();
@@ -222,7 +221,6 @@
             this.flowLayoutPanel1.Controls.Add(this.buttonSend);
             this.flowLayoutPanel1.Controls.Add(this.buttonSpendableTransactions);
             this.flowLayoutPanel1.Controls.Add(this.buttonHistory);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 85);
@@ -272,16 +270,6 @@
             this.buttonSend.Text = "Send";
             this.buttonSend.UseVisualStyleBackColor = true;
             this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(3, 242);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // pictureBox1
             // 
@@ -481,6 +469,5 @@
         private System.Windows.Forms.ImageList imageListSmall;
         private UserControls.ReceiveView receiveView1;
         private System.Windows.Forms.ToolStripMenuItem refreshNetToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
     }
 }
